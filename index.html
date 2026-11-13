@@ -1,1356 +1,586 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARTHUR Kévin - Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --dark-bg: #ffffff;
-            --card-bg: #f1f5f9;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-        }
-
-        body {
-            font-family: 'Poppins', 'Trebuchet MS', 'Segoe UI', sans-serif;
-            background: #ffffff;
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        nav a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
-            opacity: 0.1;
-            top: -250px;
-            right: -250px;
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.1; }
-            50% { transform: scale(1.1); opacity: 0.15; }
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .hero-content h2 {
-            font-size: 2rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            animation: fadeInUp 0.8s ease-out 0.4s backwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            animation: fadeInUp 0.8s ease-out 0.6s backwards;
-        }
-
-        .btn {
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* Section */
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            margin: 1rem auto;
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .skill-item {
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 10px;
-            border-left: 3px solid var(--primary-color);
-            transition: transform 0.3s;
-        }
-
-        .skill-item:hover {
-            transform: translateX(5px);
-        }
-
-        .skill-item h3 {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .skill-item p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        /* Timeline Section */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
-        }
-
-        .timeline-item {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            position: relative;
-            transition: transform 0.3s;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(10px);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 2rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            border: 3px solid var(--dark-bg);
-        }
-
-        .timeline-date {
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .timeline-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-company {
-            color: var(--text-secondary);
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-description {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        .timeline-description ul {
-            margin-top: 0.5rem;
-            padding-left: 1.5rem;
-        }
-
-        .timeline-description li {
-            margin-bottom: 0.3rem;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-description {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            background: rgba(99, 102, 241, 0.2);
-            color: var(--primary-color);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-
-        .project-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .project-link:hover {
-            color: var(--secondary-color);
-        }
-
-        /* Contact Section */
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: transform 0.3s;
-            text-align: left;
-        }
-
-        .contact-item:hover {
-            transform: scale(1.05);
-        }
-
-        .contact-icon {
-            font-size: 2rem;
-        }
-
-        .contact-item a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .contact-item a:hover {
-            text-decoration: underline;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: var(--card-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-        }
-
-        .social-link:hover {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            transform: translateY(-5px);
-        }
-
-        /* CV Section */
-        .cv-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 3rem;
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-            border: 2px solid var(--primary-color);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .cv-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
-        }
-
-        .cv-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cv-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .cv-card p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .cv-details {
-            background: rgba(99, 102, 241, 0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            text-align: left;
-        }
-
-        .cv-details h4 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .cv-details ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .cv-details li {
-            padding: 0.5rem 0;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .cv-details li:before {
-            content: '✓';
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        .btn-cv {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-
-        .btn-cv:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
-        }
-
-        /* PDF Modal */
-        .pdf-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .pdf-modal-content {
-            position: relative;
-            width: 90%;
-            max-width: 900px;
-            height: 90%;
-            margin: 2% auto;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .pdf-modal-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .pdf-modal-header h3 {
-            color: white;
-            margin: 0;
-        }
-
-        .close-modal {
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            transition: transform 0.3s;
-        }
-
-        .close-modal:hover {
-            transform: rotate(90deg);
-        }
-
-        .pdf-viewer {
-            width: 100%;
-            height: calc(100% - 60px);
-            overflow: auto;
-            padding: 2rem;
-            background: #f5f5f5;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--card-bg);
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--text-secondary);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content h2 {
-                font-size: 1.5rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kévin ARTHUR | Portfolio BTS SIO SISR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --cyan:#00f5ff; --magenta:#ff00aa; --green:#00ff88; --gold:#ffd700;
+  --bg-dark:#070b14; --bg-card:#0d1525; --border:rgba(0,245,255,.14);
+  --text:#c9d6e8; --text-dim:#7a8aa3; --heading:#ffffff;
+  --nav-bg:rgba(7,11,20,.86); --grid:rgba(0,245,255,.05);
+  --radius:12px; --transition:.3s ease;
+  --font-tech:'Orbitron','Trebuchet MS',sans-serif;
+  --font-mono:'JetBrains Mono','Courier New',monospace;
+  --font-body:'Poppins','Trebuchet MS','Segoe UI',sans-serif;
+}
+[data-theme="light"]{
+  --cyan:#0891b2; --magenta:#c026d3; --green:#059669; --gold:#b7791f;
+  --bg-dark:#f4f7fb; --bg-card:#ffffff; --border:rgba(8,145,178,.25);
+  --text:#334155; --text-dim:#64748b; --heading:#0f172a;
+  --nav-bg:rgba(255,255,255,.92); --grid:rgba(8,145,178,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-dark);color:var(--text);line-height:1.7;overflow-x:hidden;transition:background .4s,color .4s}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+#particles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55}
+section,footer,nav{position:relative;z-index:1}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 28px;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.15}
+.nav-logo-name{font-family:var(--font-tech);font-size:.85rem;color:var(--heading);letter-spacing:1px}
+.nav-logo-sub{font-family:var(--font-mono);font-size:.65rem;color:var(--cyan)}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+.nav-link{font-family:var(--font-mono);font-size:.74rem;padding:7px 10px;border-radius:6px;color:var(--text-dim);transition:all .2s}
+.nav-link:hover,.nav-link.active{color:var(--cyan);background:color-mix(in srgb,var(--cyan) 9%,transparent)}
+#themeToggle{background:none;border:1px solid var(--border);color:var(--cyan);width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:.95rem;transition:all .2s;flex-shrink:0}
+#themeToggle:hover{background:color-mix(in srgb,var(--cyan) 12%,transparent)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hamburger span{width:24px;height:2px;background:var(--cyan);transition:.3s}
+
+/* HERO */
+#home{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 80px;overflow:hidden}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%)}
+.scanlines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(0,0,0,.05) 4px);pointer-events:none}
+.hero-content{position:relative;max-width:820px}
+.console-prefix{font-family:var(--font-mono);color:var(--green);font-size:.95rem;margin-bottom:14px}
+.hero-title{font-family:var(--font-tech);font-size:clamp(2.2rem,7vw,4.4rem);font-weight:900;color:var(--heading);line-height:1.1;margin-bottom:18px}
+.glitch{position:relative;display:inline-block}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;overflow:hidden}
+.glitch::before{color:var(--cyan);left:2px;clip-path:inset(0 0 60% 0);animation:glitch1 3.2s infinite steps(1)}
+.glitch::after{color:var(--magenta);left:-2px;clip-path:inset(60% 0 0 0);animation:glitch2 2.7s infinite steps(1)}
+@keyframes glitch1{0%,92%,100%{transform:translate(0)}93%{transform:translate(-3px,1px)}96%{transform:translate(3px,-1px)}}
+@keyframes glitch2{0%,90%,100%{transform:translate(0)}91%{transform:translate(3px,1px)}95%{transform:translate(-3px,-1px)}}
+.hero-subtitle{font-family:var(--font-mono);font-size:clamp(1rem,2.4vw,1.35rem);color:var(--cyan);min-height:2em;margin-bottom:24px}
+.cursor-blink{animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:30px}
+.tag{font-family:var(--font-mono);font-size:.78rem;padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:color-mix(in srgb,var(--cyan) 6%,transparent);color:var(--text)}
+.tag i{color:var(--cyan);margin-right:6px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:34px}
+.btn{font-family:var(--font-mono);font-size:.85rem;padding:12px 26px;border-radius:8px;border:1px solid var(--cyan);cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .25s}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--magenta));border-color:transparent;color:#fff;font-weight:700}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 28px color-mix(in srgb,var(--cyan) 35%,transparent)}
+.btn-outline{background:transparent;color:var(--cyan)}
+.btn-outline:hover{background:color-mix(in srgb,var(--cyan) 12%,transparent);transform:translateY(-3px)}
+.status-bar{font-family:var(--font-mono);font-size:.72rem;color:var(--text-dim);display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:blink 1.6s infinite}
+.sep{opacity:.4}
+.scroll-indicator{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-family:var(--font-mono);font-size:.62rem;color:var(--text-dim)}
+.scroll-line{width:1px;height:34px;background:linear-gradient(var(--cyan),transparent);animation:scrollAnim 1.8s infinite}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* SECTIONS */
+section.block{padding:100px 40px;max-width:1200px;margin:0 auto}
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:48px}
+.section-tag{font-family:var(--font-mono);color:var(--magenta);font-size:.95rem}
+.section-header h2{font-family:var(--font-tech);font-size:clamp(1.2rem,3vw,1.8rem);color:var(--heading);text-transform:uppercase;letter-spacing:2px;white-space:nowrap}
+.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--cyan),transparent);opacity:.4}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* CARDS */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition)}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 30px color-mix(in srgb,var(--cyan) 12%,transparent);border-color:color-mix(in srgb,var(--cyan) 40%,transparent)}
+.about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px}
+.card-header{display:flex;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:.78rem;color:var(--cyan)}
+.card-body{padding:20px 22px;font-size:.92rem}
+.card-body p+p{margin-top:12px}
+.trait-list li{font-family:var(--font-mono);font-size:.82rem;margin-bottom:8px}
+.trait-icon{color:var(--green);margin-right:8px}
+.interest-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.interest-item{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.78rem;padding:10px;border:1px solid var(--border);border-radius:8px;background:color-mix(in srgb,var(--cyan) 4%,transparent)}
+.interest-item i{color:var(--cyan)}
+
+/* SKILLS */
+.skills-console{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:30px;overflow:hidden}
+.console-bar{display:flex;align-items:center;gap:7px;padding:10px 16px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--cyan) 5%,transparent)}
+.dot{width:11px;height:11px;border-radius:50%}
+.dot.red{background:#ff5f57}.dot.yellow{background:#febc2e}.dot.green{background:#28c840}
+.console-title{margin-left:10px;font-family:var(--font-mono);font-size:.74rem;color:var(--text-dim)}
+.console-output{padding:16px 20px;font-family:var(--font-mono);font-size:.82rem}
+.c-prompt{color:var(--green)}.c-cmd{color:var(--cyan)}.c-comment{color:var(--text-dim)}.c-ok{color:var(--green)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.skill-card{padding:26px 24px}
+.skill-icon{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--cyan);border:1px solid var(--border);background:color-mix(in srgb,var(--cyan) 8%,transparent);margin-bottom:14px}
+.skill-card h3{font-family:var(--font-tech);font-size:.88rem;color:var(--heading);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px}
+.skill-tags span,.mini-tags span{font-family:var(--font-mono);font-size:.72rem;padding:3px 10px;border-radius:4px;border:1px solid var(--border);background:color-mix(in srgb,var(--cyan) 6%,transparent);color:var(--text-dim);transition:all .2s}
+.card:hover .skill-tags span,.card:hover .mini-tags span{color:var(--cyan);border-color:color-mix(in srgb,var(--cyan) 40%,transparent)}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--cyan),var(--magenta));opacity:.35}
+.timeline-item{position:relative;margin-bottom:34px}
+.timeline-item::before{content:'';position:absolute;left:-35px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);border:2px solid var(--bg-dark)}
+.exp-card{padding:24px 28px}
+.exp-card:hover{transform:translateX(6px)}
+.exp-header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.exp-title-block h3{font-family:var(--font-tech);font-size:.95rem;color:var(--heading);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.exp-company{font-family:var(--font-mono);font-size:.82rem;color:var(--cyan)}
+.exp-meta{display:flex;flex-wrap:wrap;gap:8px}
+.exp-badge{font-family:var(--font-mono);font-size:.7rem;padding:4px 12px;border-radius:20px;white-space:nowrap}
+.exp-badge i{margin-right:5px}
+.exp-badge.stage{background:color-mix(in srgb,var(--cyan) 9%,transparent);border:1px solid color-mix(in srgb,var(--cyan) 30%,transparent);color:var(--cyan)}
+.exp-badge.date{background:color-mix(in srgb,var(--gold) 9%,transparent);border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);color:var(--gold)}
+.exp-badge.lieu{background:color-mix(in srgb,var(--green) 9%,transparent);border:1px solid color-mix(in srgb,var(--green) 30%,transparent);color:var(--green)}
+.exp-desc{font-size:.9rem;margin-bottom:14px}
+.exp-sub{font-family:var(--font-mono);font-size:.72rem;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.exp-missions{margin-bottom:14px}
+.exp-missions ul{display:flex;flex-direction:column;gap:6px}
+.exp-missions li{font-family:var(--font-mono);font-size:.8rem;padding-left:16px;position:relative}
+.exp-missions li::before{content:'\25b8';position:absolute;left:0;color:var(--green)}
+.mini-tags{display:flex;flex-wrap:wrap;gap:6px}
+
+/* CERTIFS */
+.empty-box{text-align:center;padding:60px 20px;border:1px dashed var(--border);border-radius:var(--radius)}
+.empty-box i{font-size:2rem;color:var(--text-dim);margin-bottom:12px;display:block}
+.empty-box p{font-family:var(--font-mono);font-size:.82rem;color:var(--text-dim)}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.project-card{cursor:pointer;display:flex;flex-direction:column;overflow:hidden}
+.project-card-header{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:.76rem}
+.file-name{color:var(--text-dim)}.file-name i{margin-right:6px;color:var(--green)}
+.project-status{padding:2px 10px;border-radius:20px;font-size:.68rem;color:var(--green);border:1px solid color-mix(in srgb,var(--green) 35%,transparent);background:color-mix(in srgb,var(--green) 8%,transparent)}
+.project-card-body{padding:20px 22px;flex:1}
+.project-card-body h3{font-family:var(--font-tech);font-size:.92rem;color:var(--heading);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.project-card-body p{font-size:.88rem;margin-bottom:14px}
+.project-card-footer{padding:12px 20px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:.72rem;color:var(--text-dim);text-align:right}
+.project-card:hover .project-card-footer{color:var(--cyan)}
+
+/* VEILLE */
+.veille-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-bottom:30px}
+.veille-card{padding:22px 24px;display:flex;align-items:center;gap:16px}
+.veille-icon{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.v-secu{background:color-mix(in srgb,var(--magenta) 12%,transparent);border:1px solid color-mix(in srgb,var(--magenta) 30%,transparent);color:var(--magenta)}
+.v-cloud{background:color-mix(in srgb,var(--cyan) 10%,transparent);border:1px solid color-mix(in srgb,var(--cyan) 30%,transparent);color:var(--cyan)}
+.v-net{background:color-mix(in srgb,var(--gold) 10%,transparent);border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);color:var(--gold)}
+.veille-card h3{font-family:var(--font-tech);font-size:.85rem;color:var(--heading);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.veille-card p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-dim);line-height:1.5}
+.sources{text-align:center}
+.sources .exp-sub{margin-bottom:14px}
+.sources .mini-tags{justify-content:center}
+
+/* CV */
+.cv-container{display:flex;justify-content:center}
+.cv-card{padding:36px 40px;text-align:center;max-width:520px;width:100%}
+.cv-card .cv-icon{font-size:2.4rem;color:var(--cyan);margin-bottom:12px}
+.cv-card h3{font-family:var(--font-mono);font-size:.95rem;color:var(--heading);margin-bottom:8px}
+.cv-card p{font-size:.88rem;margin-bottom:22px}
+
+/* CONTACT */
+footer{padding:100px 40px 30px;max-width:1200px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-bottom:28px}
+.contact-card{display:flex;align-items:center;gap:14px;padding:20px 24px;font-family:var(--font-mono);font-size:.85rem}
+.contact-card i{color:var(--cyan);font-size:1.15rem;width:24px;text-align:center}
+.social-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.social-btn{font-family:var(--font-mono);font-size:.82rem;padding:11px 22px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);display:inline-flex;align-items:center;gap:8px;transition:all .25s}
+.social-btn:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-3px)}
+.footer-bottom{margin-top:60px;padding-top:22px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-family:var(--font-mono);font-size:.72rem;color:var(--text-dim)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:560px;max-height:85vh;overflow:auto;box-shadow:0 0 50px color-mix(in srgb,var(--cyan) 18%,transparent)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:.8rem;color:var(--cyan)}
+.modal-close{background:none;border:none;color:var(--heading);font-size:1.8rem;cursor:pointer;line-height:1}
+.modal-body{padding:24px}
+.modal-title{font-family:var(--font-tech);font-size:1.05rem;color:var(--heading);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.modal-meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;font-family:var(--font-mono);font-size:.74rem;color:var(--text-dim)}
+.modal-meta i{color:var(--cyan);margin-right:5px}
+.modal-desc{font-size:.92rem;margin-bottom:18px}
+
+@media(max-width:1100px){
+  .hamburger{display:flex}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--nav-bg);padding:12px 20px;border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+}
+@media(max-width:768px){
+  section.block{padding:70px 20px}footer{padding:70px 20px 24px}
+  .exp-header{flex-direction:column}.timeline{padding-left:28px}
+  .section-header h2{white-space:normal}.cv-card{padding:28px 22px}
+}
+</style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <div class="logo">ARTHUR K.</div>
-            <ul>
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#apropos">À propos</a></li>
-                <li><a href="#formation">Formation</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#experience">Expérience</a></li>
-                <li><a href="#projets">Projets</a></li>
-                <li><a href="#veille">Veille</a></li>
-                <li><a href="#cv">CV</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <section id="accueil" class="hero">
-        <div class="hero-content">
-            <h1>ARTHUR Kévin</h1>
-            <h2>Technicien Système et Réseaux</h2>
-            <div class="cta-buttons">
-                <a href="#projets" class="btn btn-primary">Voir mes projets</a>
-                <a href="#cv" class="btn btn-secondary">Télécharger mon CV</a>
-            </div>
-        </div>
-    </section>
+<canvas id="particles-canvas"></canvas>
 
-    <section id="apropos">
-        <div class="container">
-            <h2 class="section-title">À propos de moi</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Je m'appelle Kévin Arthur et je suis actuellement étudiant en BTS SIO (option SISR). Grâce aux séries comme Mr Robot et des reportages télévisés, cela m'a amené vers cette filière. Aujourd'hui, je veux me spécialiser dans l'administration des systèmes, la gestion des réseaux et la virtualisation.</p>
-                </div>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <h3>🌐 Réseaux</h3>
-                        <p>Cisco Packet Tracer, Configuration réseau, TCP/IP</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>💻 Virtualisation</h3>
-                        <p>VMWare, Gestion de machines virtuelles</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>🖥️ Systèmes</h3>
-                        <p>Administration serveur, Linux, Windows Server</p>
-                    </div>
-                    <div class="skill-item">
-                        <h3>🛠️ Outils</h3>
-                        <p>Word, Pix, Documentation technique</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<nav id="navbar">
+  <a href="#home" class="nav-brand">
+    <svg viewBox="0 0 120 104" width="46" height="40" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00f5ff"/><stop offset="100%" stop-color="#ff00aa"/></linearGradient></defs>
+      <polygon points="60,3 112,31 112,73 60,101 8,73 8,31" fill="#0d1525" stroke="url(#lg)" stroke-width="2.5"/>
+      <text x="60" y="58" text-anchor="middle" dominant-baseline="middle" font-family="Orbitron,Arial,sans-serif" font-weight="900" font-size="27" fill="url(#lg)">KA</text>
+    </svg>
+    <div class="nav-logo-text"><span class="nav-logo-name">Kévin A.</span><span class="nav-logo-sub">// BTS SIO SISR</span></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="nav-link">Accueil</a></li>
+    <li><a href="#about" class="nav-link">À propos</a></li>
+    <li><a href="#skills" class="nav-link">Compétences</a></li>
+    <li><a href="#formation" class="nav-link">Formation</a></li>
+    <li><a href="#experiences" class="nav-link">Expériences</a></li>
+    <li><a href="#certifications" class="nav-link">Certifications</a></li>
+    <li><a href="#projects" class="nav-link">Projets</a></li>
+    <li><a href="#veille" class="nav-link">Veille</a></li>
+    <li><a href="#cv" class="nav-link">CV</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+  <button id="themeToggle" title="Changer de thème"><i class="fas fa-sun"></i></button>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
 
-    <section id="formation">
-        <div class="container">
-            <h2 class="section-title">Formation</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">2025 - 2027</div>
-                    <h3 class="timeline-title">BTS SIO Option SISR</h3>
-                    <div class="timeline-company">Campus MEWO - Metz</div>
-                    <p class="timeline-description">
-                        Formation en Solutions d'Infrastructure, Systèmes et Réseaux. Acquisition de compétences en administration système, gestion de réseaux, virtualisation, cybersécurité et support technique.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2022 - 2023</div>
-                    <h3 class="timeline-title">L1 STAPS</h3>
-                    <div class="timeline-company">UFR Bridoux - Metz</div>
-                    <p class="timeline-description">
-                        Première année de licence Sciences et Techniques des Activités Physiques et Sportives. Développement de compétences en organisation, gestion de groupe et travail d'équipe.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2021 - 2022</div>
-                    <h3 class="timeline-title">Baccalauréat Général</h3>
-                    <div class="timeline-company">Lycée Robert Schuman - Metz</div>
-                    <p class="timeline-description">
-                        Spécialités : Mathématiques et Sciences de la Vie et de la Terre. Formation scientifique solide développant la logique et l'analyse.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2018 - 2019</div>
-                    <h3 class="timeline-title">Brevet des Collèges</h3>
-                    <div class="timeline-company">Collège Sadi Carnot - Diego-Suarez, Madagascar</div>
-                    <p class="timeline-description">
-                        Obtention du diplôme national du brevet.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="certifications">
-        <div class="container">
-            <h2 class="section-title">Certifications</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">🏅</div>
-                    <div class="project-content">
-                        <h3 class="project-title">[Nom de la certification]</h3>
-                        <p class="project-description">
-                            [Organisme] • [Année d'obtention]
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">[Domaine]</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">Expérience Professionnelle</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">Août 2026 (5 semaines)</div>
-                    <h3 class="timeline-title">Stage - Assistant Support Informatique</h3>
-                    <div class="timeline-company">EI Géraldine SOUTY - Saint-Avold</div>
-                    <p class="timeline-description">
-                        J'ai accompagné l'entreprise au quotidien dans la gestion et la résolution de divers incidents informatiques, tout en participant concrètement à l'évolution et à l'amélioration de son parc systèmes et réseaux.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Mai 2025 - Présent</div>
-                    <h3 class="timeline-title">Assistant d'Éducation (AED)</h3>
-                    <div class="timeline-company">Internat d'Excellence Châtel Saint-Germain - Metz</div>
-                    <p class="timeline-description">
-                        Encadrement et accompagnement des élèves de l'internat. Surveillance et animation des temps d'étude. Participation à la vie de l'établissement et au suivi éducatif des élèves.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Novembre 2023 - Août 2024</div>
-                    <h3 class="timeline-title">Agent Polyvalent</h3>
-                    <div class="timeline-company">FC Metz - Stade Saint-Symphorien</div>
-                    <p class="timeline-description">
-                        Accueil et gestion du public lors des matchs. Polyvalence dans les différentes missions liées au bon déroulement des événements sportifs. Travail en équipe et gestion des situations d'urgence.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Novembre 2023 - Juin 2024</div>
-                    <h3 class="timeline-title">Agent Polyvalent E-Transmission</h3>
-                    <div class="timeline-company">PSA - Metz</div>
-                    <p class="timeline-description">
-                        Gestion et traitement des transmissions électroniques. Organisation et optimisation des flux d'informations. Rigueur dans le traitement des données.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Juillet 2023 - Août 2023</div>
-                    <h3 class="timeline-title">Magasinier</h3>
-                    <div class="timeline-company">Pharmacie Hôpital Mercy - Metz</div>
-                    <p class="timeline-description">
-                        Gestion des stocks pharmaceutiques. Réception, contrôle et rangement des produits. Organisation du magasin et respect des normes d'hygiène et de sécurité.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Engagement associatif</div>
-                    <h3 class="timeline-title">Création d'équipe de basket</h3>
-                    <div class="timeline-company">Association "Le Terrain" - Borny, Metz</div>
-                    <p class="timeline-description">
-                        Création et gestion d'une équipe de basket dans le quartier de Borny. Animation sportive et sociale. Développement de l'esprit d'équipe et promotion du sport auprès des jeunes.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projets">
-        <div class="container">
-            <h2 class="section-title">Mes Projets</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">📚</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Glossaire Technique</h3>
-                        <p class="project-description">
-                            Création d'un glossaire complet sur les bases fondamentales des systèmes et réseaux, servant de référence pour les concepts clés en informatique.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Documentation</span>
-                            <span class="tag">Word</span>
-                            <span class="tag">Bases réseaux</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">🌐</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Serveur Web</h3>
-                        <p class="project-description">
-                            Déploiement et configuration d'un serveur web complet, incluant la configuration réseau, la sécurisation des accès et l'optimisation des performances.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Linux</span>
-                            <span class="tag">Apache/Nginx</span>
-                            <span class="tag">Configuration</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">🎫</div>
-                    <div class="project-content">
-                        <h3 class="project-title">GLPI - Gestion de parc</h3>
-                        <p class="project-description">
-                            Installation et configuration de GLPI pour la gestion du parc informatique et le suivi des tickets d'assistance. Mise en place d'un système de ticketing professionnel.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">GLPI</span>
-                            <span class="tag">Gestion de parc</span>
-                            <span class="tag">Ticketing</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">📋</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Rapport de Stage</h3>
-                        <p class="project-description">
-                            Documentation complète de mon expérience en stage : présentation de l'entreprise, les postes, les missions réalisées et le bilan des compétences acquises.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Documentation</span>
-                            <span class="tag">Rapport</span>
-                            <span class="tag">Stage</span>
-                        </div>
-                        <a href="#" class="project-link">📄 Consulter le rapport →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="veille">
-        <div class="container">
-            <h2 class="section-title">Veille Technologique</h2>
-            <p style="text-align: center; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 3rem;">Voici mes différentes veilles technologiques.</p>
-
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">🔒</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Cybersécurité</h3>
-                        <p class="project-description">
-                            Suivi des dernières failles de sécurité, des nouvelles techniques de protection et des bonnes pratiques en matière de sécurité informatique.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Sécurité</span>
-                            <span class="tag">Firewall</span>
-                            <span class="tag">VPN</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">☁️</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Cloud & Virtualisation</h3>
-                        <p class="project-description">
-                            Veille sur les évolutions du Cloud Computing, des hyperviseurs et des technologies de conteneurisation comme Docker et Kubernetes.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">AWS</span>
-                            <span class="tag">Azure</span>
-                            <span class="tag">VMWare</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">🌐</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Réseaux & Infrastructure</h3>
-                        <p class="project-description">
-                            Actualités sur les équipements réseau Cisco, les nouveaux protocoles, le SDN (Software-Defined Networking) et les innovations en matière de connectivité.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Cisco</span>
-                            <span class="tag">5G</span>
-                            <span class="tag">IoT</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 3rem; text-align: center;">
-                <h3 style="margin-bottom: 1.5rem; color: var(--primary-color);">Sources de veille</h3>
-                <div class="project-tags" style="justify-content: center;">
-                    <span class="tag">IT Social</span>
-                    <span class="tag">Silicon.fr</span>
-                    <span class="tag">Le Monde Informatique</span>
-                    <span class="tag">Cisco Blog</span>
-                    <span class="tag">Reddit r/sysadmin</span>
-                    <span class="tag">YouTube Tech</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="cv">
-        <div class="container">
-            <h2 class="section-title">Mon CV</h2>
-            <div style="text-align: center;">
-                
-                <div class="cv-details">
-                    <h4>Points clés de mon profil :</h4>
-                    <ul>
-                        <li>Formation BTS SIO SISR au Campus MEWO</li>
-                        <li>Compétences en systèmes et réseaux</li>
-                        <li>Expériences professionnelles variées</li>
-                        <li>Maîtrise des outils : VMWare, Cisco Packet Tracer, GLPI</li>
-                        <li>Autonomie, rigueur et sens de l'organisation</li>
-                        <li>Trilingue : Français, Anglais, Malgache</li>
-                    </ul>
-                </div>
-
-                <a href="#" class="btn-cv" id="downloadCV">📥 Télécharger mon CV (PDF)</a>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
-                    Dernière mise à jour : Novembre 2024
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- PDF Modal -->
-    <div id="pdfModal" class="pdf-modal">
-        <div class="pdf-modal-content">
-            <div class="pdf-modal-header">
-                <h3>CV - Kévin ARTHUR</h3>
-                <button class="close-modal" onclick="closePDFModal()">×</button>
-            </div>
-            <div class="pdf-viewer" id="pdfViewer"></div>
-        </div>
+<section id="home">
+  <div class="scanlines"></div>
+  <div class="grid-bg"></div>
+  <div class="hero-content">
+    <div class="console-prefix">root@portfolio:~$</div>
+    <h1 class="hero-title"><span class="glitch" data-text="Kévin Arthur">Kévin Arthur</span></h1>
+    <div class="hero-subtitle"><span id="typingText"></span><span class="cursor-blink">█</span></div>
+    <div class="hero-tags">
+      <span class="tag"><i class="fas fa-graduation-cap"></i>BTS SIO SISR — 2025-2027</span>
+      <span class="tag"><i class="fas fa-map-marker-alt"></i>Metz, France</span>
+      <span class="tag"><i class="fas fa-car"></i>Permis B</span>
     </div>
+    <div class="hero-btns">
+      <a href="#about" class="btn btn-primary">Découvrir <i class="fas fa-chevron-down"></i></a>
+      <a href="#projects" class="btn btn-outline"><i class="fas fa-folder-open"></i> Mes projets</a>
+    </div>
+    <div class="status-bar">
+      <span class="status-dot"></span><span>SYSTEM ONLINE</span>
+      <span class="sep">|</span><span id="clock">--:--:--</span>
+      <span class="sep">|</span><span>Campus MEWO — Metz</span>
+    </div>
+  </div>
+  <div class="scroll-indicator"><div class="scroll-line"></div><span>SCROLL</span></div>
+</section>
 
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Contact</h2>
-            <div class="contact-content">
-                <p style="color: var(--text-secondary); margin-bottom: 2rem;">
-                    N'hésitez pas à me contacter pour discuter de vos projets, opportunités de stage ou collaboration dans le domaine des systèmes et réseaux.
-                </p>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span class="contact-icon">📧</span>
-                        <div>
-                            <strong>Email</strong>
-                            <p style="color: var(--text-secondary);">
-                                <a href="mailto:kevinarthurvonjy@gmail.com">kevinarthurvonjy@gmail.com</a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <span class="contact-icon">📍</span>
-                        <div>
-                            <strong>Localisation</strong>
-                            <p style="color: var(--text-secondary);">Metz, 57070</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/arthur-k%C3%A9vin-7aa16a332/" target="_blank" class="social-link" title="LinkedIn">💼</a>
-                    <a href="mailto:kevinarthurvonjy@gmail.com" class="social-link" title="Email">📧</a>
-                </div>
-            </div>
+<section id="about" class="block">
+  <div class="section-header reveal"><span class="section-tag">// 01</span><h2>À propos de moi</h2><div class="section-line"></div></div>
+  <div class="about-grid">
+    <div class="card reveal">
+      <div class="card-header"><i class="fas fa-terminal"></i><span>PARCOURS.log</span></div>
+      <div class="card-body">
+        <p>Je m'appelle Kévin Arthur et je suis actuellement étudiant en BTS SIO (option SISR). Grâce aux séries comme Mr Robot et des reportages télévisés, cela m'a amené vers cette filière.</p>
+        <p>Aujourd'hui, je veux me spécialiser dans l'administration des systèmes, la gestion des réseaux et la virtualisation.</p>
+      </div>
+    </div>
+    <div class="card reveal">
+      <div class="card-header"><i class="fas fa-microchip"></i><span>SKILLS_SOFT.dat</span></div>
+      <div class="card-body">
+        <ul class="trait-list">
+          <li><span class="trait-icon">►</span>Travailler en équipe</li>
+          <li><span class="trait-icon">►</span>Curiosité</li>
+          <li><span class="trait-icon">►</span>Adaptabilité</li>
+          <li><span class="trait-icon">►</span>Gestion du stress</li>
+          <li><span class="trait-icon">►</span>Autonomie</li>
+          <li><span class="trait-icon">►</span>Respect des engagements</li>
+          <li><span class="trait-icon">►</span>Créativité</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card reveal">
+      <div class="card-header"><i class="fas fa-gamepad"></i><span>INTERESTS.cfg</span></div>
+      <div class="card-body">
+        <div class="interest-grid">
+          <div class="interest-item"><i class="fas fa-basketball"></i><span>Basketball</span></div>
+          <div class="interest-item"><i class="fas fa-film"></i><span>Cinéma</span></div>
+          <div class="interest-item"><i class="fas fa-newspaper"></i><span>Veille tech</span></div>
+          <div class="interest-item"><i class="fas fa-language"></i><span>FR · EN · MG</span></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 ARTHUR Kévin - Technicien Système et Réseaux. Tous droits réservés.</p>
-        </div>
-    </footer>
+<section id="skills" class="block">
+  <div class="section-header reveal"><span class="section-tag">// 02</span><h2>Compétences</h2><div class="section-line"></div></div>
+  <div class="skills-console reveal">
+    <div class="console-bar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="console-title">skill_matrix.sh</span></div>
+    <div class="console-output"><span class="c-prompt">$</span> <span class="c-cmd">loading skill_matrix --verbose</span><br><span class="c-comment"># Initialisation du scan des compétences...</span><br><span class="c-ok">[OK]</span> Modules chargés avec succès.</div>
+  </div>
+  <div class="skills-grid">
+    <div class="card skill-card reveal"><div class="skill-icon"><i class="fas fa-network-wired"></i></div><h3>Réseaux</h3><div class="skill-tags"><span>Cisco Packet Tracer</span></div></div>
+    <div class="card skill-card reveal"><div class="skill-icon"><i class="fas fa-layer-group"></i></div><h3>Virtualisation</h3><div class="skill-tags"><span>VMware</span></div></div>
+    <div class="card skill-card reveal"><div class="skill-icon"><i class="fas fa-shield-halved"></i></div><h3>Pare-feu</h3><div class="skill-tags"><span>Pix</span></div></div>
+    <div class="card skill-card reveal"><div class="skill-icon"><i class="fas fa-ticket"></i></div><h3>Gestion de parc</h3><div class="skill-tags"><span>GLPI</span><span>Ticketing</span></div></div>
+    <div class="card skill-card reveal"><div class="skill-icon"><i class="fas fa-server"></i></div><h3>Serveur Web</h3><div class="skill-tags"><span>Création de serveur Web</span></div></div>
+    <div class="card skill-card reveal"><div class="skill-icon"><i class="fas fa-file-word"></i></div><h3>Bureautique</h3><div class="skill-tags"><span>Word</span><span>Excel</span><span>PowerPoint</span></div></div>
+  </div>
+</section>
 
-    <script>
-        // Load jsPDF library
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-        document.head.appendChild(script);
+<section id="formation" class="block">
+  <div class="section-header reveal"><span class="section-tag">// 03</span><h2>Formation</h2><div class="section-line"></div></div>
+  <div class="timeline">
+    <div class="timeline-item reveal"><div class="card exp-card">
+      <div class="exp-header"><div class="exp-title-block"><h3>BTS SIO — Option SISR</h3><div class="exp-company"><i class="fas fa-school" style="margin-right:6px"></i>Campus MEWO</div></div>
+      <div class="exp-meta"><span class="exp-badge date"><i class="fas fa-calendar"></i>2025 — 2027</span><span class="exp-badge lieu"><i class="fas fa-location-dot"></i>Metz</span></div></div>
+      <p class="exp-desc" style="margin:0">Solutions d'Infrastructure, Systèmes et Réseaux.</p>
+    </div></div>
+    <div class="timeline-item reveal"><div class="card exp-card">
+      <div class="exp-header"><div class="exp-title-block"><h3>L1 STAPS</h3><div class="exp-company"><i class="fas fa-school" style="margin-right:6px"></i>UFR Bridoux</div></div>
+      <div class="exp-meta"><span class="exp-badge date"><i class="fas fa-calendar"></i>2022 — 2023</span><span class="exp-badge lieu"><i class="fas fa-location-dot"></i>Metz</span></div></div>
+    </div></div>
+    <div class="timeline-item reveal"><div class="card exp-card">
+      <div class="exp-header"><div class="exp-title-block"><h3>Baccalauréat Général</h3><div class="exp-company"><i class="fas fa-school" style="margin-right:6px"></i>Lycée Robert Schuman</div></div>
+      <div class="exp-meta"><span class="exp-badge date"><i class="fas fa-calendar"></i>2021 — 2022</span><span class="exp-badge lieu"><i class="fas fa-location-dot"></i>Metz</span></div></div>
+      <p class="exp-desc" style="margin:0">Spécialités : Mathématiques et Sciences de la Vie et de la Terre.</p>
+    </div></div>
+    <div class="timeline-item reveal"><div class="card exp-card">
+      <div class="exp-header"><div class="exp-title-block"><h3>Brevet des collèges</h3><div class="exp-company"><i class="fas fa-school" style="margin-right:6px"></i>Collège Sadi Carnot</div></div>
+      <div class="exp-meta"><span class="exp-badge date"><i class="fas fa-calendar"></i>2018 — 2019</span><span class="exp-badge lieu"><i class="fas fa-location-dot"></i>Diego-Suarez, Madagascar</span></div></div>
+    </div></div>
+  </div>
+</section>
 
-        // Generate CV PDF
-        function generateCV() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            let y = 20;
-            
-            // Title
-            doc.setFontSize(24);
-            doc.setTextColor(99, 102, 241);
-            doc.text('Kévin ARTHUR', 105, y, { align: 'center' });
-            
-            y += 10;
-            doc.setFontSize(12);
-            doc.setTextColor(100, 100, 100);
-            doc.text('Candidat au BTS SIO SISR en apprentissage - Mewo Campus', 105, y, { align: 'center' });
-            
-            // Contact
-            y += 15;
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.text('Email: kevinarthurvonjy@gmail.com  |  Tel: 07 66 43 65 44  |  Metz, 57070  |  Permis B', 105, y, { align: 'center' });
-            
-            // Profil
-            y += 15;
-            doc.setFontSize(14);
-            doc.setTextColor(99, 102, 241);
-            doc.text('PROFIL', 20, y);
-            
-            y += 7;
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            const profil = doc.splitTextToSize('Actuellement candidat au BTS Services Informatiques aux Organisations (option SISR), je suis à la recherche d\'un contrat d\'apprentissage en tant que technicien des systèmes et réseaux. Grâce à mes premières expériences dans le monde professionnel, j\'ai pu acquérir des qualités telles que la rigueur, l\'autonomie et le sens de l\'organisation. Curieux et motivé, je suis déterminé à mettre mes compétences au service de votre entreprise et à continuer à progresser.', 170);
-            doc.text(profil, 20, y);
-            
-            // Formations
-            y += 25;
-            doc.setFontSize(14);
-            doc.setTextColor(99, 102, 241);
-            doc.text('DIPLOMES ET FORMATIONS', 20, y);
-            
-            y += 8;
-            doc.setFontSize(11);
-            doc.setTextColor(0, 0, 0);
-            doc.setFont(undefined, 'bold');
-            doc.text('BTS SIO SISR', 20, y);
-            doc.setFont(undefined, 'normal');
-            doc.setFontSize(10);
-            doc.text('Septembre 2025 - 2027', 150, y);
-            
-            y += 5;
-            doc.setTextColor(100, 100, 100);
-            doc.text('MEWO Campus - Metz', 20, y);
-            
-            y += 10;
-            doc.setFontSize(11);
-            doc.setTextColor(0, 0, 0);
-            doc.setFont(undefined, 'bold');
-            doc.text('Bac Général et Technologique', 20, y);
-            doc.setFont(undefined, 'normal');
-            doc.setFontSize(10);
-            doc.text('Juillet 2022', 150, y);
-            
-            y += 5;
-            doc.setTextColor(100, 100, 100);
-            doc.text('Spécialités: Mathématiques et Sciences de la Vie et de la Terre', 20, y);
-            y += 4;
-            doc.text('Lycée Robert Schuman - Metz', 20, y);
-            
-            // Expériences
-            y += 12;
-            doc.setFontSize(14);
-            doc.setTextColor(99, 102, 241);
-            doc.text('EXPERIENCES PROFESSIONNELLES', 20, y);
-            
-            y += 8;
-            doc.setFontSize(11);
-            doc.setTextColor(0, 0, 0);
-            doc.setFont(undefined, 'bold');
-            doc.text('Assistant d\'éducation', 20, y);
-            doc.setFont(undefined, 'normal');
-            doc.setFontSize(10);
-            doc.text('Mai 2025 - Août 2025', 150, y);
-            
-            y += 5;
-            doc.setTextColor(100, 100, 100);
-            doc.text('Internat de l\'excellence - Metz', 20, y);
-            y += 4;
-            doc.text('• Encadrer, veiller à la sécurité des élèves', 20, y);
-            y += 4;
-            doc.text('• Accompagnement tout au long du cursus scolaire', 20, y);
-            
-            y += 8;
-            doc.setFontSize(11);
-            doc.setTextColor(0, 0, 0);
-            doc.setFont(undefined, 'bold');
-            doc.text('Agent d\'entretien', 20, y);
-            doc.setFont(undefined, 'normal');
-            doc.setFontSize(10);
-            doc.text('Fév 2025 - Mai 2025', 150, y);
-            
-            y += 5;
-            doc.setTextColor(100, 100, 100);
-            doc.text('Stade Saint-Symphorien - Metz', 20, y);
-            y += 4;
-            doc.text('• Nettoyage, logistique et rangement de l\'ensemble du stade', 20, y);
-            
-            y += 8;
-            doc.setFontSize(11);
-            doc.setTextColor(0, 0, 0);
-            doc.setFont(undefined, 'bold');
-            doc.text('Opérateur Polyvalent', 20, y);
-            doc.setFont(undefined, 'normal');
-            doc.setFontSize(10);
-            doc.text('Nov 2023 - Juil 2024', 150, y);
-            
-            y += 5;
-            doc.setTextColor(100, 100, 100);
-            doc.text('Punch Powertrain PSA e-Transmissions - Metz', 20, y);
-            y += 4;
-            doc.text('• Démontage des boîtes de vitesses', 20, y);
-            y += 4;
-            doc.text('• Tri, nettoyage et inspection des pièces', 20, y);
-            
-            y += 8;
-            doc.setFontSize(11);
-            doc.setTextColor(0, 0, 0);
-            doc.setFont(undefined, 'bold');
-            doc.text('Magasinier', 20, y);
-            doc.setFont(undefined, 'normal');
-            doc.setFontSize(10);
-            doc.text('Juil 2023 - Août 2023', 150, y);
-            
-            y += 5;
-            doc.setTextColor(100, 100, 100);
-            doc.text('Hôpital Mercy - Metz', 20, y);
-            y += 4;
-            doc.text('• Réception des médicaments, chargement et déchargement', 20, y);
-            y += 4;
-            doc.text('• Validation des livraisons par voie papier et électronique', 20, y);
-            
-            // Page 2
-            doc.addPage();
-            y = 20;
-            
-            // Compétences
-            doc.setFontSize(14);
-            doc.setTextColor(99, 102, 241);
-            doc.text('COMPETENCES TECHNIQUES', 20, y);
-            
-            y += 8;
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.text('• Adapter ses comportements à des interlocuteurs différents', 20, y);
-            y += 5;
-            doc.text('• Utilisation d\'outils numériques (Word, Excel, PowerPoint)', 20, y);
-            y += 5;
-            doc.text('• VMWare, Cisco Packet Tracer, GLPI', 20, y);
-            y += 5;
-            doc.text('• Partager les règles de sécurité individuelles et collectives', 20, y);
-            y += 5;
-            doc.text('• Sélectionner, assembler, contrôler et faire le suivi des composants', 20, y);
-            y += 5;
-            doc.text('• Analyser rapidement une situation - Intervention rapide', 20, y);
-            y += 5;
-            doc.text('• Entretenir un équipement, une machine, une installation', 20, y);
-            
-            // Langues
-            y += 12;
-            doc.setFontSize(14);
-            doc.setTextColor(99, 102, 241);
-            doc.text('LANGUES', 20, y);
-            
-            y += 8;
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.text('• Français', 20, y);
-            doc.text('• Anglais', 80, y);
-            doc.text('• Malgache', 140, y);
-            
-            // Atouts
-            y += 12;
-            doc.setFontSize(14);
-            doc.setTextColor(99, 102, 241);
-            doc.text('ATOUTS', 20, y);
-            
-            y += 8;
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.text('• Travailler en équipe', 20, y);
-            y += 5;
-            doc.text('• Faire preuve de curiosité', 20, y);
-            y += 5;
-            doc.text('• S\'adapter aux changements', 20, y);
-            y += 5;
-            doc.text('• Gérer son stress', 20, y);
-            y += 5;
-            doc.text('• Faire preuve d\'autonomie', 20, y);
-            y += 5;
-            doc.text('• Respecter ses engagements, assumer ses responsabilités', 20, y);
-            y += 5;
-            doc.text('• Faire preuve de créativité, d\'inventivité', 20, y);
-            
-            // Centres d'intérêt
-            y += 12;
-            doc.setFontSize(14);
-            doc.setTextColor(99, 102, 241);
-            doc.text('CENTRES D\'INTERET', 20, y);
-            
-            y += 8;
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.setFont(undefined, 'bold');
-            doc.text('Basketball', 20, y);
-            doc.setFont(undefined, 'normal');
-            y += 5;
-            doc.text('Ai fait partie de l\'équipe de l\'association de mon quartier', 20, y);
-            y += 4;
-            doc.text('ainsi que de l\'équipe universitaire de Metz en 2023', 20, y);
-            
-            y += 8;
-            doc.setFont(undefined, 'bold');
-            doc.text('Cinéma', 20, y);
-            doc.setFont(undefined, 'normal');
-            y += 5;
-            doc.text('Découvrir les œuvres du cinéma français, anglais et d\'autres nationalités', 20, y);
-            
-            y += 8;
-            doc.setFont(undefined, 'bold');
-            doc.text('S\'informer sur tous', 20, y);
-            doc.setFont(undefined, 'normal');
-            y += 5;
-            doc.text('Me tiens régulièrement informé des nouveautés technologiques et informatiques', 20, y);
-            
-            return doc;
-        }
+<section id="experiences" class="block">
+  <div class="section-header reveal"><span class="section-tag">// 04</span><h2>Expériences &amp; Stages</h2><div class="section-line"></div></div>
+  <div class="timeline">
 
-        // Download CV
-        document.getElementById('downloadCV').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            setTimeout(() => {
-                const doc = generateCV();
-                doc.save('CV_Kevin_ARTHUR_2024.pdf');
-                
-                const btn = document.getElementById('downloadCV');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '✓ CV téléchargé !';
-                btn.style.background = '#10b981';
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
-                }, 2000);
-            }, 500);
-        });
+    <div class="timeline-item reveal"><div class="card exp-card">
+      <div class="exp-header">
+        <div class="exp-title-block"><h3>Assistant support informatique</h3><div class="exp-company"><i class="fas fa-building" style="margin-right:6px"></i>EI Géraldine SOUTY</div></div>
+        <div class="exp-meta"><span class="exp-badge stage"><i class="fas fa-id-badge"></i>Stage BTS SIO</span><span class="exp-badge date"><i class="fas fa-calendar"></i>Août 2026 · 5 semaines</span><span class="exp-badge lieu"><i class="fas fa-location-dot"></i>Saint-Avold</span></div>
+      </div>
+      <p class="exp-desc">J'ai accompagné l'entreprise au quotidien dans la gestion et la résolution de divers incidents informatiques, tout en participant concrètement à l'évolution et à l'amélioration de son parc systèmes et réseaux.</p>
+      <div class="exp-sub"><i class="fas fa-tags" style="margin-right:6px"></i>Compétences mobilisées</div>
+      <div class="mini-tags"><span>Support informatique</span><span>Gestion d'incidents</span><span>Parc systèmes &amp; réseaux</span></div>
+    </div></div>
 
-        // View CV in modal
-        document.getElementById('viewCV')?.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            setTimeout(() => {
-                const doc = generateCV();
-                const pdfData = doc.output('datauristring');
-                
-                const pdfViewer = document.getElementById('pdfViewer');
-                pdfViewer.innerHTML = `<iframe src="${pdfData}" width="100%" height="100%" style="border: none; border-radius: 5px;"></iframe>`;
-                
-                document.getElementById('pdfModal').style.display = 'block';
-            }, 500);
-        });
+    <div class="timeline-item reveal"><div class="card exp-card">
+      <div class="exp-header">
+        <div class="exp-title-block"><h3>Assistant d'éducation (AED)</h3><div class="exp-company"><i class="fas fa-building" style="margin-right:6px"></i>Internat d'Excellence Châtel Saint-Germain</div></div>
+        <div class="exp-meta"><span class="exp-badge date"><i class="fas fa-calendar"></i>Mai 2025 — Août 2025</span><span class="exp-badge lieu"><i class="fas fa-location-dot"></i>Metz</span></div>
+      </div>
+      <div class="exp-missions"><div class="exp-sub"><i class="fas fa-list-check" style="margin-right:6px"></i>Missions</div><ul><li>Encadrer et veiller à la sécurité des élèves</li><li>Accompagnement tout au long du cursus scolaire</li></ul></div>
+    </div></div>
 
-        // Close modal function
-        function closePDFModal() {
-            document.getElementById('pdfModal').style.display = 'none';
-        }
+    <div class="timeline-item reveal"><div class="card exp-card">
+      <div class="exp-header">
+        <div class="exp-title-block"><h3>Agent d'entretien</h3><div class="exp-company"><i class="fas fa-building" style="margin-right:6px"></i>Stade Saint-Symphorien</div></div>
+        <div class="exp-meta"><span class="exp-badge date"><i class="fas fa-calendar"></i>Fév 2025 — Mai 2025</span><span class="exp-badge lieu"><i class="fas fa-location-dot"></i>Metz</span></div>
+      </div>
+      <div class="exp-missions"><div class="exp-sub"><i class="fas fa-list-check" style="margin-right:6px"></i>Missions</div><ul><li>Nettoyage, logistique et rangement de l'ensemble du stade</li></ul></div>
+    </div></div>
 
-        // Close modal on outside click
-        window.onclick = function(event) {
-            const modal = document.getElementById('pdfModal');
-            if (event.target == modal) {
-                closePDFModal();
-            }
-        }
+    <div class="timeline-item reveal"><div class="card exp-card">
+      <div class="exp-header">
+        <div class="exp-title-block"><h3>Opérateur polyvalent</h3><div class="exp-company"><i class="fas fa-building" style="margin-right:6px"></i>Punch Powertrain PSA e-Transmissions</div></div>
+        <div class="exp-meta"><span class="exp-badge date"><i class="fas fa-calendar"></i>Nov 2023 — Juil 2024</span><span class="exp-badge lieu"><i class="fas fa-location-dot"></i>Metz</span></div>
+      </div>
+      <div class="exp-missions"><div class="exp-sub"><i class="fas fa-list-check" style="margin-right:6px"></i>Missions</div><ul><li>Démontage des boîtes de vitesses</li><li>Tri, nettoyage et inspection des pièces</li></ul></div>
+    </div></div>
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+    <div class="timeline-item reveal"><div class="card exp-card">
+      <div class="exp-header">
+        <div class="exp-title-block"><h3>Magasinier</h3><div class="exp-company"><i class="fas fa-building" style="margin-right:6px"></i>Pharmacie — Hôpital Mercy</div></div>
+        <div class="exp-meta"><span class="exp-badge date"><i class="fas fa-calendar"></i>Juil 2023 — Août 2023</span><span class="exp-badge lieu"><i class="fas fa-location-dot"></i>Metz</span></div>
+      </div>
+      <div class="exp-missions"><div class="exp-sub"><i class="fas fa-list-check" style="margin-right:6px"></i>Missions</div><ul><li>Réception des médicaments, chargement et déchargement</li><li>Validation des livraisons par voie papier et électronique</li></ul></div>
+    </div></div>
 
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                nav.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-    </script>
+    <div class="timeline-item reveal"><div class="card exp-card">
+      <div class="exp-header">
+        <div class="exp-title-block"><h3>Création d'une équipe de basket</h3><div class="exp-company"><i class="fas fa-people-group" style="margin-right:6px"></i>Association « Le Terrain »</div></div>
+        <div class="exp-meta"><span class="exp-badge stage"><i class="fas fa-handshake-angle"></i>Engagement associatif</span><span class="exp-badge lieu"><i class="fas fa-location-dot"></i>Borny, Metz</span></div>
+      </div>
+      <p class="exp-desc" style="margin:0">Création d'une équipe de basket dans le quartier de Borny, à Metz.</p>
+    </div></div>
+
+  </div>
+</section>
+
+<section id="certifications" class="block">
+  <div class="section-header reveal"><span class="section-tag">// 05</span><h2>Certifications</h2><div class="section-line"></div></div>
+  <div class="empty-box reveal"><i class="fas fa-certificate"></i><p>Mes certifications seront affichées ici.</p></div>
+</section>
+
+<section id="projects" class="block">
+  <div class="section-header reveal"><span class="section-tag">// 06</span><h2>Projets</h2><div class="section-line"></div></div>
+  <div class="projects-grid" id="projectsGrid"></div>
+</section>
+
+<section id="veille" class="block">
+  <div class="section-header reveal"><span class="section-tag">// 07</span><h2>Veille technologique</h2><div class="section-line"></div></div>
+  <p class="reveal" style="text-align:center;margin-bottom:34px;font-size:1.02rem">Voici mes différentes veilles technologiques.</p>
+  <div class="veille-grid">
+    <div class="card veille-card reveal"><span class="veille-icon v-secu"><i class="fas fa-shield-halved"></i></span><div><h3>Cybersécurité</h3><p>Failles de sécurité, nouvelles menaces et bonnes pratiques</p></div></div>
+    <div class="card veille-card reveal"><span class="veille-icon v-cloud"><i class="fas fa-cloud"></i></span><div><h3>Cloud &amp; Virtualisation</h3><p>Cloud computing, hyperviseurs et conteneurs</p></div></div>
+    <div class="card veille-card reveal"><span class="veille-icon v-net"><i class="fas fa-network-wired"></i></span><div><h3>Réseaux &amp; Infrastructure</h3><p>Équipements Cisco, protocoles et innovations réseau</p></div></div>
+  </div>
+  <div class="sources reveal">
+    <div class="exp-sub">Sources de veille</div>
+    <div class="mini-tags"><span>IT Social</span><span>Silicon.fr</span><span>Le Monde Informatique</span><span>Cisco Blog</span><span>Reddit r/sysadmin</span><span>YouTube Tech</span></div>
+  </div>
+</section>
+
+<section id="cv" class="block">
+  <div class="section-header reveal"><span class="section-tag">// 08</span><h2>Curriculum Vitae</h2><div class="section-line"></div></div>
+  <div class="cv-container reveal">
+    <div class="card cv-card">
+      <div class="cv-icon"><i class="fas fa-file-lines"></i></div>
+      <h3>CV_Kevin_ARTHUR.pdf</h3>
+      <p>Téléchargez mon CV pour découvrir mon parcours, mes expériences et mes compétences.</p>
+      <a href="CV_Kevin_ARTHUR.pdf" download class="btn btn-primary"><i class="fas fa-download"></i> Télécharger le CV</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="section-header reveal"><span class="section-tag">// 09</span><h2>Contact</h2><div class="section-line"></div></div>
+  <div class="contact-grid">
+    <a href="mailto:kevinarthurvonjy@gmail.com" class="card contact-card reveal"><i class="fas fa-envelope"></i><span>kevinarthurvonjy@gmail.com</span></a>
+    <div class="card contact-card reveal"><i class="fas fa-location-dot"></i><span>Metz, 57070</span></div>
+  </div>
+  <div class="social-links reveal">
+    <a href="https://www.linkedin.com/in/arthur-k%C3%A9vin-7aa16a332/" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <a href="mailto:kevinarthurvonjy@gmail.com" class="social-btn"><i class="fas fa-paper-plane"></i> M'écrire</a>
+  </div>
+  <div class="footer-bottom"><span>Kévin ARTHUR © 2026 — BTS SIO SISR</span><span>Campus MEWO · Metz</span></div>
+</footer>
+
+<div class="modal-overlay" id="projectModal">
+  <div class="modal-box">
+    <div class="modal-header"><span><i class="fas fa-file-code"></i> <span id="modalFile"></span></span><button class="modal-close" id="modalClose">×</button></div>
+    <div class="modal-body">
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <div class="modal-meta"><span><i class="fas fa-tag"></i><span id="modalCat"></span></span><span><i class="fas fa-graduation-cap"></i>BTS SIO SISR</span></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="exp-sub">Technologies utilisées</div>
+      <div class="mini-tags" id="modalTags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const root = document.documentElement;
+
+/* Thème clair / sombre */
+const themeBtn = document.getElementById('themeToggle');
+themeBtn.addEventListener('click', () => {
+  const light = root.getAttribute('data-theme') === 'light';
+  root.setAttribute('data-theme', light ? 'dark' : 'light');
+  themeBtn.innerHTML = light ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+});
+
+/* Menu mobile */
+const navLinks = document.getElementById('navLinks');
+document.getElementById('hamburger').addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+/* Texte tapé */
+const phrases = ['Étudiant en BTS SIO SISR', 'Administration des systèmes', 'Gestion des réseaux', 'Virtualisation'];
+const typingEl = document.getElementById('typingText');
+let pi = 0, ci = 0, deleting = false;
+function type() {
+  const word = phrases[pi];
+  typingEl.textContent = word.slice(0, ci);
+  if (!deleting && ci < word.length) { ci++; setTimeout(type, 75); }
+  else if (!deleting) { deleting = true; setTimeout(type, 1500); }
+  else if (ci > 0) { ci--; setTimeout(type, 38); }
+  else { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(type, 300); }
+}
+type();
+
+/* Horloge */
+const clockEl = document.getElementById('clock');
+function tick() { clockEl.textContent = new Date().toLocaleTimeString('fr-FR'); }
+tick(); setInterval(tick, 1000);
+
+/* Projets */
+const projects = [
+  { file: 'projet_01.sh', title: 'Glossaire technique', cat: 'Documentation',
+    desc: "Création d'un glossaire sur les bases fondamentales des systèmes et réseaux, utilisable comme référence pour les notions clés.",
+    tags: ['Documentation', 'Word', 'Bases systèmes & réseaux'] },
+  { file: 'projet_02.sh', title: 'Création d\'un serveur Web', cat: 'Systèmes',
+    desc: "Mise en place d'un serveur Web dans le cadre de ma formation BTS SIO SISR.",
+    tags: ['Serveur Web'] },
+  { file: 'projet_03.sh', title: 'GLPI — Gestion de parc', cat: 'Gestion de parc',
+    desc: "Mise en place de GLPI, outil de gestion de parc informatique et de suivi des tickets d'assistance.",
+    tags: ['GLPI', 'Gestion de parc', 'Ticketing'] }
+];
+const grid = document.getElementById('projectsGrid');
+projects.forEach((p, i) => {
+  const el = document.createElement('div');
+  el.className = 'card project-card reveal';
+  el.innerHTML =
+    '<div class="project-card-header"><span class="file-name"><i class="fas fa-file-code"></i>' + p.file + '</span><span class="project-status">Réalisé</span></div>' +
+    '<div class="project-card-body"><h3>' + p.title + '</h3><p>' + p.desc + '</p><div class="mini-tags">' + p.tags.map(t => '<span>' + t + '</span>').join('') + '</div></div>' +
+    '<div class="project-card-footer"><i class="fas fa-expand-alt"></i> Voir détails</div>';
+  el.addEventListener('click', () => openModal(i));
+  grid.appendChild(el);
+});
+const modal = document.getElementById('projectModal');
+function openModal(i) {
+  const p = projects[i];
+  document.getElementById('modalFile').textContent = p.file;
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalCat').textContent = p.cat;
+  document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalTags').innerHTML = p.tags.map(t => '<span>' + t + '</span>').join('');
+  modal.classList.add('open');
+}
+function closeModal() { modal.classList.remove('open'); }
+document.getElementById('modalClose').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* Apparition au scroll */
+const revealEls = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+} else { revealEls.forEach(el => el.classList.add('visible')); }
+
+/* Lien actif dans le menu */
+const sections = document.querySelectorAll('section[id], footer[id]');
+const links = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = 'home';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+  links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+});
+
+/* Particules */
+const cv = document.getElementById('particles-canvas');
+const ctx = cv.getContext('2d');
+let W, H, pts = [];
+function resize() {
+  W = cv.width = window.innerWidth; H = cv.height = window.innerHeight;
+  const n = Math.min(70, Math.floor(W / 20));
+  pts = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4 }));
+}
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  const color = getComputedStyle(root).getPropertyValue('--cyan').trim() || '#00f5ff';
+  ctx.fillStyle = color; ctx.strokeStyle = color;
+  pts.forEach((p, i) => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0 || p.x > W) p.vx *= -1;
+    if (p.y < 0 || p.y > H) p.vy *= -1;
+    ctx.globalAlpha = .8; ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2); ctx.fill();
+    for (let j = i + 1; j < pts.length; j++) {
+      const q = pts[j], d = Math.hypot(p.x - q.x, p.y - q.y);
+      if (d < 130) { ctx.globalAlpha = (1 - d / 130) * .3; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+    }
+  });
+  requestAnimationFrame(draw);
+}
+window.addEventListener('resize', resize);
+resize(); draw();
+</script>
 </body>
 </html>
