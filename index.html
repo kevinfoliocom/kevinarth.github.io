@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kévin ARTHUR | Portfolio BTS SIO SISR</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 :root{
@@ -199,6 +196,24 @@ footer{padding:100px 40px 30px;max-width:1200px;margin:0 auto}
 .modal-meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;font-family:var(--font-mono);font-size:.74rem;color:var(--text-dim)}
 .modal-meta i{color:var(--cyan);margin-right:5px}
 .modal-desc{font-size:.92rem;margin-bottom:18px}
+
+/* COOKIES */
+.cookie-banner{position:fixed;left:20px;right:20px;bottom:20px;z-index:300;max-width:560px;margin:0 auto;background:var(--bg-card);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);border-radius:var(--radius);padding:20px 22px;box-shadow:0 0 40px color-mix(in srgb,var(--cyan) 20%,transparent);transform:translateY(160%);opacity:0;transition:transform .5s ease,opacity .5s ease}
+.cookie-banner.show{transform:none;opacity:1}
+.cookie-title{font-family:var(--font-mono);font-size:.82rem;color:var(--cyan);margin-bottom:8px}
+.cookie-title i{margin-right:8px}
+.cookie-banner p{font-size:.82rem;margin-bottom:14px}
+.cookie-banner p a{color:var(--cyan);text-decoration:underline;cursor:pointer}
+.cookie-actions{display:flex;flex-wrap:wrap;gap:10px}
+.cookie-actions .btn{padding:9px 20px;font-size:.78rem}
+.legal-h{font-family:var(--font-mono);font-size:.78rem;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;margin:20px 0 6px}
+.legal-h:first-child{margin-top:0}
+.legal-body p,.legal-body li{font-size:.86rem}
+.legal-body ul{list-style:disc;padding-left:20px}
+.legal-body a{color:var(--cyan);text-decoration:underline}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links button{background:none;border:none;font-family:var(--font-mono);font-size:.72rem;color:var(--text-dim);cursor:pointer;transition:color .2s}
+.footer-links button:hover{color:var(--cyan)}
 
 @media(max-width:1100px){
   .hamburger{display:flex}
@@ -447,7 +462,7 @@ footer{padding:100px 40px 30px;max-width:1200px;margin:0 auto}
     <a href="https://www.linkedin.com/in/arthur-k%C3%A9vin-7aa16a332/" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
     <a href="mailto:kevinarthurvonjy@gmail.com" class="social-btn"><i class="fas fa-paper-plane"></i> M'écrire</a>
   </div>
-  <div class="footer-bottom"><span>Kévin ARTHUR © 2026 — BTS SIO SISR</span><span>Campus MEWO · Metz</span></div>
+  <div class="footer-bottom"><span>Kévin ARTHUR © 2026 — BTS SIO SISR</span><div class="footer-links"><button type="button" id="openLegal"><i class="fas fa-scale-balanced"></i> Mentions légales</button><button type="button" id="openCookies"><i class="fas fa-cookie-bite"></i> Gérer les cookies</button></div></div>
 </footer>
 
 <div class="modal-overlay" id="projectModal">
@@ -459,6 +474,49 @@ footer{padding:100px 40px 30px;max-width:1200px;margin:0 auto}
       <p class="modal-desc" id="modalDesc"></p>
       <div class="exp-sub">Technologies utilisées</div>
       <div class="mini-tags" id="modalTags"></div>
+    </div>
+  </div>
+</div>
+
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookies">
+  <div class="cookie-title"><i class="fas fa-cookie-bite"></i>Cookies &amp; confidentialité</div>
+  <p>Ce site est hébergé sur <strong>GitHub Pages</strong>. Il ne dépose aucun cookie de suivi et n'utilise aucun outil de statistiques. En acceptant, vous autorisez le chargement des polices Google Fonts, qui peuvent recevoir votre adresse IP. <a id="cookieMore">En savoir plus</a></p>
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-primary" id="cookieAccept"><i class="fas fa-check"></i> Accepter</button>
+    <button type="button" class="btn btn-outline" id="cookieRefuse"><i class="fas fa-xmark"></i> Refuser</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="legalModal">
+  <div class="modal-box">
+    <div class="modal-header"><span><i class="fas fa-scale-balanced"></i> mentions_legales.txt</span><button class="modal-close" id="legalClose">×</button></div>
+    <div class="modal-body legal-body">
+      <h2 class="modal-title">Mentions légales</h2>
+
+      <div class="legal-h">Éditeur du site</div>
+      <p>Kévin ARTHUR, étudiant en BTS SIO option SISR (Campus MEWO, Metz).<br>Metz (57070), France.<br>Contact : <a href="mailto:kevinarthurvonjy@gmail.com">kevinarthurvonjy@gmail.com</a><br>Directeur de la publication : Kévin ARTHUR.</p>
+
+      <div class="legal-h">Nature du site</div>
+      <p>Site personnel à but pédagogique et non commercial, présentant mon parcours, mes compétences et mes réalisations dans le cadre de ma formation.</p>
+
+      <div class="legal-h">Hébergement</div>
+      <p>Site hébergé par GitHub, Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.</p>
+
+      <div class="legal-h">Propriété intellectuelle</div>
+      <p>Les textes et contenus de ce site sont la propriété de Kévin ARTHUR, sauf mention contraire. Toute reproduction sans autorisation est interdite. Les logos et marques cités (Cisco, VMware, GLPI, etc.) appartiennent à leurs propriétaires respectifs.</p>
+
+      <div class="legal-h">Données personnelles &amp; cookies</div>
+      <ul>
+        <li>Ce site ne comporte ni formulaire, ni compte utilisateur, ni outil de statistiques, et ne dépose aucun cookie de suivi.</li>
+        <li>Comme tout hébergeur, GitHub peut enregistrer l'adresse IP des visiteurs dans ses journaux techniques (voir la politique de confidentialité de GitHub).</li>
+        <li>Si vous acceptez, les polices Google Fonts sont chargées depuis les serveurs de Google, qui peuvent recevoir votre adresse IP. Si vous refusez, des polices système sont utilisées.</li>
+        <li>Les icônes sont chargées depuis le CDN cdnjs (Cloudflare), nécessaire à l'affichage du site.</li>
+        <li>Si vous m'écrivez par e-mail, votre adresse n'est utilisée que pour vous répondre.</li>
+      </ul>
+      <p style="margin-top:10px">Conformément au RGPD et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et de suppression de vos données : écrivez-moi à l'adresse ci-dessus.</p>
+
+      <div class="legal-h">Liens externes</div>
+      <p>Ce site peut contenir des liens vers des sites tiers (LinkedIn, etc.). Je ne suis pas responsable de leur contenu.</p>
     </div>
   </div>
 </div>
@@ -553,6 +611,32 @@ window.addEventListener('scroll', () => {
   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
   links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
 });
+
+/* Cookies */
+const banner = document.getElementById('cookieBanner');
+function loadFonts() {
+  if (document.getElementById('gfonts')) return;
+  const l = document.createElement('link');
+  l.id = 'gfonts'; l.rel = 'stylesheet';
+  l.href = 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600&display=swap';
+  document.head.appendChild(l);
+}
+function showBanner() { banner.classList.add('show'); }
+function hideBanner() { banner.classList.remove('show'); }
+document.getElementById('cookieAccept').addEventListener('click', () => { hideBanner(); loadFonts(); });
+document.getElementById('cookieRefuse').addEventListener('click', hideBanner);
+document.getElementById('openCookies').addEventListener('click', showBanner);
+setTimeout(showBanner, 800);
+
+/* Mentions légales */
+const legal = document.getElementById('legalModal');
+function openLegal() { legal.classList.add('open'); }
+function closeLegal() { legal.classList.remove('open'); }
+document.getElementById('openLegal').addEventListener('click', openLegal);
+document.getElementById('cookieMore').addEventListener('click', openLegal);
+document.getElementById('legalClose').addEventListener('click', closeLegal);
+legal.addEventListener('click', e => { if (e.target === legal) closeLegal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLegal(); });
 
 /* Particules */
 const cv = document.getElementById('particles-canvas');
